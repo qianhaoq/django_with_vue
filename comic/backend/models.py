@@ -13,5 +13,6 @@ class Pokemon(Document):
     name_en = StringField()
     page_url = StringField()
     img_url = StringField()
+    local_img_path = StringField()
     meta = {'collection': 'pokemon'}
 # Create your models here.

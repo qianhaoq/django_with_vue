@@ -12,7 +12,7 @@ class PokemonSerilizer(mongoserializers.DocumentSerializer):
     name_en = serializers.CharField()
     page_url = serializers.CharField()
     img_url = serializers.CharField()
-
+    local_img_path = serializers.CharField()
     class Meta:
         model = Pokemon
         fields = '__all__'
