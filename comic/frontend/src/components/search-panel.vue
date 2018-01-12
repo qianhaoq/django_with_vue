@@ -42,6 +42,9 @@ export default {
             now: -1,
             searchIndex: 0,
             logoData: [{
+                name: 'Pokemon搜索',
+                searchSrc: 'http://127.0.0.1/pokemon/'
+            },{
                 name: '百度搜索',
                 searchSrc: 'https://image.baidu.com/search/index?tn=baiduimage&wd='
 
