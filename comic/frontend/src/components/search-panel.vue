@@ -1,4 +1,5 @@
 <template>
+
     <div>
         <!-- 组件不能写到template的根节点上，即每个组件只有一个根节点，这里的div就是这个template的根节点 -->
        <!--  getindex是自定义事件 -->
@@ -12,6 +13,8 @@
             -->
             <input type="text" v-model="keyword" @keyup="get($event)" @keydown.enter="search()" @keydown.down="selectDown()" @keydown.up.prevent="selectUp()">
             <!-- 这是一个小叉叉，点击它可清除输入框内容 -->
+
+            <!-- <input class="search-reset" type="file" value="上传图片"  id="file"  @change='onUpload'> -->
             <span class="search-reset" @click="clearInput()">&times;</span>
             <button class="search-btn" @click="search()">搜一下</button>
             <div class="search-select">
@@ -22,6 +25,20 @@
                     </li>
                 </transition-group>
             </div>
+            <el-upload
+                class="upload-demo"
+                ref="upload"
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :on-preview="handlePreview"
+                :on-remove="handleRemove"
+                :file-list="fileList"
+                :auto-upload="false"
+                multiple:limit="1"
+                list-type="picture">
+                <el-button slot="trigger" size="small" type="primary">上传图片</el-button>
+                <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">以图搜图</el-button>
+                <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+            </el-upload>
         </div>
     </div>
 </template>
@@ -43,7 +60,7 @@ export default {
             searchIndex: 0,
             logoData: [{
                 name: 'Pokemon搜索',
-                searchSrc: 'http://127.0.0.1/pokemon/'
+                searchSrc: 'http://127.0.0.1/search/keyword='
             },{
                 name: '百度搜索',
                 searchSrc: 'https://image.baidu.com/search/index?tn=baiduimage&wd='
@@ -107,8 +124,19 @@ export default {
         },
         getIndex: function(index) {
             this.searchIndex = index;
+        },
+
+        submitUpload() {
+            this.$refs.upload.submit();
+        },
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
         }
     }
+
 }
 </script>
 
